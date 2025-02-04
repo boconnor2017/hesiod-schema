@@ -4,6 +4,9 @@ from hesiod import lib_json as libjson
 from hesiod import lib_logs_and_headers as liblog 
 from hesiod import lib_paramiko as libpko 
 
+# Import Schema libraries
+from lib import o365 as lib365
+
 # Import Standard Python libraries
 import os
 import sys
@@ -24,3 +27,61 @@ liblog.write_to_logs(err, logfile_name)
 err = ""
 liblog.write_to_logs(err, logfile_name)
 
+# Main functions
+def _main_():
+    print("Running hesiod-schema.py...")
+    print("")
+
+def help_stdout():
+    print("HELP MENU: hesiod-schema.py [options]")
+    print("Enter options 1x per run, do not add all parameters at once!")
+    print("--help option to see this menu.")
+    print("-o365    option to convert a word or excel document into Markdown.")
+    print("")
+    print("")
+
+def match_help(args):
+    if '--help' in args:
+        return True
+
+def match_o365(args):
+    if '-o365' in args:
+        return True
+    
+# Get args
+err = "Getting args..."
+liblog.write_to_logs(err, logfile_name)
+arg_len = len(sys.argv) 
+err = "    "+str(arg_len)+" args passed."
+liblog.write_to_logs(err, logfile_name)
+
+# Initialize default user options
+user_options = ['n', 'n', 'n']
+
+# Match args
+match_found = False 
+match_found = match_help(sys.argv)
+if match_found :
+    err = "    --help found. Initiating standard output."
+    liblog.write_to_logs(err, logfile_name)
+    help_stdout()
+    err = "    Exiting script."
+    liblog.write_to_logs(err, logfile_name)
+    sys.exit() 
+
+else:
+  match_found = False 
+  match_found = match_o365(sys.argv)
+  if match_found :
+      err = "    -o365 found. Converting O365 document to Markdown."
+      liblog.write_to_logs(err, logfile_name)
+      markdowncontent = lib365.test("/usr/local/drop/"+"vcf-papw-4.xlsx")
+      #print(markdowncontent)
+      libgen.append_text_to_file(markdowncontent, "test_markdown.md")
+      err = "    Exiting script."
+      liblog.write_to_logs(err, logfile_name)
+      sys.exit() 
+
+err = "No arguments found. Instantiating _main_()"
+liblog.write_to_logs(err, logfile_name)
+_main_()
