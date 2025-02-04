@@ -15,7 +15,7 @@ cd /usr/local/
 git clone https://github.com/boconnor2017/hesiod-schema
 ```
 ```
-cp -r hesiod/python/
+cp -r hesiod/python/ hesiod-schema/hesiod
 ```
 ```
 cd hesiod-schema/
