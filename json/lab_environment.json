@@ -1,0 +1,6 @@
+{
+    "logs" : {
+        "test.py" : "_test.log",
+        "hesiod-schema.py" : "_hesiod-schema.log"
+    }
+}
