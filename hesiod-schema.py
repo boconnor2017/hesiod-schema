@@ -75,9 +75,8 @@ else:
   if match_found :
       err = "    -o365 found. Converting O365 document to Markdown."
       liblog.write_to_logs(err, logfile_name)
-      markdowncontent = lib365.test("/usr/local/drop/"+"vcf-papw-4.xlsx")
-      #print(markdowncontent)
-      libgen.append_text_to_file(markdowncontent, "test_markdown.md")
+      markdowncontent = lib365.test("/usr/local/drop/"+sys.argv[2])
+      libgen.append_text_to_file(markdowncontent, sys.argv[3])
       err = "    Exiting script."
       liblog.write_to_logs(err, logfile_name)
       sys.exit() 
