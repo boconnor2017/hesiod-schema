@@ -1,4 +1,4 @@
-# Hesiod SCHEMA
+# Hesiod Schema
 Uses [Project Hesiod](https://github.com/boconnor2017/hesiod), a Photon based approach to manage a home lab data schema and to develop necessary architectural artifacts.
 
 ## Prerequisites
@@ -41,6 +41,6 @@ Step 1: upload your Markdown document to the `/usr/local/drop/` folder on the Ph
 
 Step 2: run the following command:   
 ```
-python3 hesiod-schema.py -o365 <name_of_your_md_file.md> <name_of_your_new_json_file.json>  
+python3 hesiod-schema.py -json <name_of_your_md_file.md> <name_of_your_new_json_file.json>  
 ```
 
