@@ -108,7 +108,9 @@ else:
       liblog.write_to_logs(err, logfile_name)
       markdowncontent = libgen.populate_var_from_file(env_json_py["drop_location"]+sys.argv[2])
       md_json_str = libmd.convert_md_2_json(markdowncontent)
-      libgen.populate_file_from_var(sys.argv[3], md_json_str)
+      #libgen.populate_file_from_var(sys.argv[3], md_json_str)
+      md_json_py = libjson.load_json_variable(md_json_str)
+      libjson.dump_json_to_file(md_json_py, sys.argv[3])
       err = "    Exiting script."
       liblog.write_to_logs(err, logfile_name)
       sys.exit() 
