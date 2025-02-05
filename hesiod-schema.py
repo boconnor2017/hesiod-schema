@@ -5,7 +5,7 @@ from hesiod import lib_logs_and_headers as liblog
 from hesiod import lib_paramiko as libpko 
 
 # Import Schema libraries
-from lib import o365 as lib365
+from lib import md as libmd
 
 # Import Standard Python libraries
 import os
@@ -56,6 +56,9 @@ def match_help(args):
 def match_o365(args):
     if '-o365' in args:
         return True
+def match_json(args):
+    if '-json' in args:
+        return True
     
 # Get args
 err = "Getting args..."
@@ -88,8 +91,24 @@ else:
       liblog.write_to_logs(err, logfile_name)
       err = "    markdown file: "+sys.argv[3]
       liblog.write_to_logs(err, logfile_name)
-      markdowncontent = lib365.convert_o365_2_md(env_json_py["drop_location"]+sys.argv[2])
+      markdowncontent = libmd.convert_o365_2_md(env_json_py["drop_location"]+sys.argv[2])
       libgen.append_text_to_file(markdowncontent, sys.argv[3])
+      err = "    Exiting script."
+      liblog.write_to_logs(err, logfile_name)
+      sys.exit() 
+
+  match_found = False 
+  match_found = match_json(sys.argv)
+  if match_found :
+      err = "    -json found. Converting Markdown file to json."
+      liblog.write_to_logs(err, logfile_name)
+      err = "    markdown file: "+env_json_py["drop_location"]+sys.argv[2]
+      liblog.write_to_logs(err, logfile_name)
+      err = "    json file: "+sys.argv[3]
+      liblog.write_to_logs(err, logfile_name)
+      markdowncontent = libgen.populate_var_from_file(env_json_py["drop_location"]+sys.argv[2])
+      md_json_str = libmd.convert_md_2_json(markdowncontent)
+      libgen.populate_file_from_var(sys.argv[3], md_json_str)
       err = "    Exiting script."
       liblog.write_to_logs(err, logfile_name)
       sys.exit() 
