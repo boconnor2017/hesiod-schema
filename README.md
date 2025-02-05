@@ -33,3 +33,14 @@ Step 2: run the following command:
 ```
 python3 hesiod-schema.py -o365 <name_of_your_o365_file.doc> <name_of_your_new_md_doc.md>  
 ```
+
+## Convert a Markdown file to JSON
+The following command will convert a Markdown file into a JSON file. 
+
+Step 1: upload your Markdown document to the `/usr/local/drop/` folder on the Photon machine.    
+
+Step 2: run the following command:   
+```
+python3 hesiod-schema.py -o365 <name_of_your_md_file.md> <name_of_your_new_json_file.json>  
+```
+
