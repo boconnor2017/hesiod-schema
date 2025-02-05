@@ -11,6 +11,10 @@ from lib import o365 as lib365
 import os
 import sys
 
+# Ignore warnings
+import warnings
+warnings.filterwarnings("ignore")
+
 # Import json configuration parameters
 env_json_str = libjson.populate_var_from_json_file("json", "lab_environment.json")
 env_json_py = libjson.load_json_variable(env_json_str)
@@ -30,7 +34,12 @@ liblog.write_to_logs(err, logfile_name)
 # Main functions
 def _main_():
     print("Running hesiod-schema.py...")
+    print("No arguments found. Defaulting to help menu. ")
     print("")
+    help_stdout()
+    err = "    Exiting script."
+    liblog.write_to_logs(err, logfile_name)
+    sys.exit() 
 
 def help_stdout():
     print("HELP MENU: hesiod-schema.py [options]")
@@ -75,7 +84,11 @@ else:
   if match_found :
       err = "    -o365 found. Converting O365 document to Markdown."
       liblog.write_to_logs(err, logfile_name)
-      markdowncontent = lib365.test("/usr/local/drop/"+sys.argv[2])
+      err = "    o365 file: "+env_json_py["drop_location"]+sys.argv[2]
+      liblog.write_to_logs(err, logfile_name)
+      err = "    markdown file: "+sys.argv[3]
+      liblog.write_to_logs(err, logfile_name)
+      markdowncontent = lib365.convert_o365_2_md(env_json_py["drop_location"]+sys.argv[2])
       libgen.append_text_to_file(markdowncontent, sys.argv[3])
       err = "    Exiting script."
       liblog.write_to_logs(err, logfile_name)
